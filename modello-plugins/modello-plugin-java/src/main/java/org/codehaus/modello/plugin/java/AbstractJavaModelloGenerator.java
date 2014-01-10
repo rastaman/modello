@@ -157,6 +157,16 @@ public abstract class AbstractJavaModelloGenerator
         {
             addModelImport( jClass, modelClass, basePackageName );
         }
+
+        // default imports
+        String defaultImportsValue = getModel().getDefault(ModelDefault.DEFAULT_IMPORTS).getValue();
+        if (defaultImportsValue != null && !"".equals(defaultImportsValue.trim()) ) {
+            String[] defaultImports = defaultImportsValue.split(",");
+            for ( int idx = 0; idx < defaultImports.length; idx++) {
+                jClass.addImport(defaultImports[idx]);
+            }
+        }
+
     }
 
     private void addModelImport( JClass jClass, ModelType modelType, String basePackageName )
@@ -167,6 +177,7 @@ public abstract class AbstractJavaModelloGenerator
         {
             jClass.addImport( packageName + '.' + modelType.getName() );
         }
+
     }
 
     protected String getPrefix( JavaFieldMetadata javaFieldMetadata )

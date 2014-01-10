@@ -57,6 +57,8 @@ public class ModelDefault
 
     public static final String STRICT_XML_ATTRIBUTES_VALUE = "true";
 
+    public static final String DEFAULT_IMPORTS = "defaultImports";
+
     private String key;
 
     private String value;
@@ -152,7 +154,8 @@ public class ModelDefault
              && ! PROPERTIES.equalsIgnoreCase( key )
              && ! CHECK_DEPRECATION.equalsIgnoreCase( key )
              && ! PACKAGE.equalsIgnoreCase( key )
-             && ! STRICT_XML_ATTRIBUTES.equalsIgnoreCase( key ) )
+             && ! STRICT_XML_ATTRIBUTES.equalsIgnoreCase( key ) 
+             && ! DEFAULT_IMPORTS.equalsIgnoreCase( key ) )
         {
             throw new ModelValidationException( "The key of default element must be ' " + SET + "', '" + LIST + "', '"
                 + MAP + "', '" + PROPERTIES + "', '" + CHECK_DEPRECATION + "', '" + PACKAGE + "' or '"
