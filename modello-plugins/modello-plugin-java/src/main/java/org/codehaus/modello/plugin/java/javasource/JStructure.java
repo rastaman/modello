@@ -567,7 +567,9 @@ public abstract class JStructure extends JType
         int period = name.lastIndexOf( "." );
         if ( period > 0 )
             name = name.substring( period + 1 );
-
+        int lt = name.indexOf( '<' );
+        if (lt > 0)
+            name = name.substring( 0, lt );
         return JNaming.isValidJavaIdentifier( name );
     } //-- isValidClassName
 

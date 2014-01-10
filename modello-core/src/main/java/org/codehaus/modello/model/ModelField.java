@@ -45,7 +45,7 @@ public class ModelField
 
     private transient ModelClass modelClass;
 
-    private static final String[] PRIMITIVE_TYPES =
+    public static final String[] PRIMITIVE_TYPES =
         { "boolean", "Boolean", "char", "Character", "byte", "Byte", "short", "Short", "int", "Integer", "long",
             "Long", "float", "Float", "double", "Double", "String", "Date", "DOM" };
 
@@ -221,7 +221,7 @@ public class ModelField
 
         // TODO: these definitions are duplicated throughout. Defined centrally, and loop through in the various uses
 
-        if ( !isPrimitive() && !isPrimitiveArray() )
+        if ( !isPrimitive() && !isPrimitiveArray() && !ModelValidationHelper.isImported( modelClass, type ) )
         {
             throw new ModelValidationException( "Field '" + getName() + "': Illegal type: '" + type + "'." );
         }
