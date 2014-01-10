@@ -29,6 +29,8 @@
     <module>modello-plugin-jackson</module>
     <module>modello-plugin-snakeyaml</module>
     <module>modello-plugin-sax</module>
+    <module>modello-plugin-jpa</module>
+    <module>modello-plugin-jaxrs</module>
   </modules>
 
   <dependencies>
