@@ -1,0 +1,17 @@
+<component-set>
+  <components>
+
+    <component>
+      <role>org.codehaus.modello.plugin.ModelloGenerator</role>
+      <role-hint>jaxrs-mapping</role-hint>
+      <implementation>org.codehaus.modello.plugin.jaxrs.JaxRSMappingModelloGenerator</implementation>   
+    </component>
+
+    <component>
+      <role>org.codehaus.modello.metadata.MetadataPlugin</role>
+      <role-hint>jaxrs</role-hint>
+      <implementation>org.codehaus.modello.plugin.jaxrs.metadata.JaxRSMetadataPlugin</implementation>
+    </component>
+
+  </components>
+</component-set>

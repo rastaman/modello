@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model>
+  <version>1.0.0</version>
+  <name>untitledModel</name>
+  <defaults>
+    <default>
+      <key>defaultImports</key>
+      <value>javax.persistence.*,javax.xml.bind.annotation.*,javax.ws.rs.*,java.util.*</value>
+    </default>
+    <default>
+      <key>package</key>
+      <value>com.jsonapps.model</value>
+    </default>
+  </defaults>
+  <interfaces>
+    <interface>
+      <name>Service</name>
+      <packageName>com.jsonapps.model</packageName>
+      <version>1.0.0</version>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void init();
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void stop();
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void start();
+</code>
+        </codeSegment>
+      </codeSegments>
+    </interface>
+  </interfaces>
+  <classes>
+    <class jpa.entity="true">
+      <name>Param</name>
+      <packageName>com.jsonapps.model</packageName>
+      <annotations>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Entity</annotation>
+        <annotation>@Table(name="params",uniqueConstraints={@UniqueConstraint(columnNames="param_id"),@UniqueConstraint(columnNames="param_name")})</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <fields>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <annotations>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="param_seq", sequenceName="param_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="param_seq")</annotation>
+            <annotation>@Column(name="param_id")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>name</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@Column(name="param_name")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>value</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@Column(name="param_value")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+      </fields>
+    </class>
+    <class jpa.entity="true">
+      <name>Group</name>
+      <packageName>com.jsonapps.model</packageName>
+      <annotations>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Entity</annotation>
+        <annotation>@Table(name="groups",uniqueConstraints={@UniqueConstraint(columnNames="group_id"),@UniqueConstraint(columnNames="group_name")})</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <fields>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <annotations>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="group_seq", sequenceName="group_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="group_seq")</annotation>
+            <annotation>@Column(name="group_id")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>groupName</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@Column(name="group_name")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>users</name>
+          <version>1.0.0</version>
+          <association>
+            <type>User</type>
+            <multiplicity>*</multiplicity>
+            <annotations>
+              <annotation>@ManyToMany</annotation>
+              <annotation>@JoinTable(name="users_group",joinColumns=@JoinColumn(name="group_id", referencedColumnName="group_id"),inverseJoinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"))</annotation>
+            </annotations>
+          </association>
+        </field>
+      </fields>
+    </class>
+    <class jpa.entity="true">
+      <name>User</name>
+      <packageName>com.jsonapps.model</packageName>
+      <annotations>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Entity</annotation>
+        <annotation>@Table(name="users",uniqueConstraints={@UniqueConstraint(columnNames="user_id"),@UniqueConstraint(columnNames="login")})</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <fields>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="user_seq", sequenceName="user_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user_seq")</annotation>
+            <annotation>@Column(name="user_id")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>login</name>
+          <type>String</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Column(name="login")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>password</name>
+          <type>String</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Column(name="password")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>email</name>
+          <type>String</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Column(name="mail")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>expirationDate</name>
+          <type>Date</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Column(name="exp_date")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>admin</name>
+          <type>boolean</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Column(name="admin")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>groups</name>
+          <version>1.0.0</version>
+          <association>
+            <type>Group</type>
+            <multiplicity>*</multiplicity>
+            <annotations>
+              <annotation>@ManyToMany</annotation>
+              <annotation>@JoinTable(name="users_group",inverseJoinColumns=@JoinColumn(name="group_id", referencedColumnName="group_id"),joinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"))</annotation>
+            </annotations>
+          </association>
+        </field>
+      </fields>
+    </class>
+    <class>
+      <name>AdminUser</name>
+      <packageName>com.jsonapps.model.admin</packageName>
+      <version>1.0.0</version>
+      <superClass>User</superClass>
+    </class>
+    <class jaxrs.urls="/config/,/config/*">
+      <name>ConfigurationService</name>
+      <packageName>com.jsonapps.model.services</packageName>
+      <version>1.0.0</version>
+      <superClass>DefaultService</superClass>
+      <fields>
+        <field>
+          <name>parameters</name>
+          <version>1.0.0</version>
+          <association>
+            <type>Param</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+      </fields>
+    </class>
+    <class>
+      <name>DefaultService</name>
+      <packageName>com.jsonapps.model.services</packageName>
+      <version>1.0.0</version>
+      <interfaces>
+        <interface>com.jsonapps.model.Service</interface>
+      </interfaces>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void init() {
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void stop() {
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void start() {
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class jaxrs.urls="/users/,/users/*">
+      <name>UsersService</name>
+      <packageName>com.jsonapps.model.services</packageName>
+      <annotations>
+        <annotation>@Path("/users")</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>JPAService</superClass>
+      <codeSegments>
+        <codeSegment>
+          <annotations>
+            <annotation>@GET</annotation>
+            <annotation>@Produces({ "application/json", "application/xml" })</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public List&lt;User&gt; getUsers() {
+        Query q = em.createQuery("SELECT u FROM User u");
+        return (List&lt;User&gt;) q.getResultList();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@GET</annotation>
+            <annotation>@Path("/{userId : [0-9]+}")</annotation>
+            <annotation>@Produces({ "application/json", "application/xml" })</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public User getUserById(@PathParam("userId") int id) {
+    Query q = em.createQuery("SELECT u FROM User u WHERE u.user_id = :uid");
+    q.setParameter("uid", id);
+     return (User) q.getSingleResult();
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class>
+      <name>JPAService</name>
+      <packageName>com.jsonapps.model.services</packageName>
+      <version>1.0.0</version>
+      <superClass>DefaultService</superClass>
+      <fields>
+        <field>
+          <name>em</name>
+          <type>javax.persistence.EntityManager</type>
+          <modifier>protected</modifier>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>emf</name>
+          <type>javax.persistence.EntityManagerFactory</type>
+          <modifier>protected</modifier>
+          <version>1.0.0</version>
+        </field>
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public JPAService() {
+        // Don't modify system props, as we are trying to get as close as
+        // possible to testing props in persistence.xml
+        HashMap props = new HashMap(System.getProperties());
+        //props.put("openjpa.AutoDetach", "commit,close,nontx-read");
+        emf = Persistence
+                .createEntityManagerFactory("openjpa", props);
+        em = emf.createEntityManager();
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+  </classes>
+</model>
