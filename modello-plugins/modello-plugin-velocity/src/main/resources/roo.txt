@@ -1,0 +1,541 @@
+Appendix A. Command Index
+This appendix was automatically built from Roo 1.0.2.RELEASE [rev 636].
+Commands are listed in alphabetic order, and are shown in monospaced font with any mandatory options you must specify when using the command. Most commands accept a large number of options, and all of the possible options for each command are presented in this appendix.
+A.1. Add On Commands
+Add On Commands are contained in org.springframework.roo.bootstrap.AddOnCommands.
+A.1.1. addon cleanup
+Cleans the $ROO_HOME/work directory so it only contains correct JARs as per $ROO_HOME/add-ons
+This command does not accept any options.
+A.1.2. addon install
+Installs a new add-on to the $ROO_HOME/add-ons directory
+--url The URL to obtain the add-on ZIP file from; no default value (mandatory)
+--automaticRestart Causes an automatic shell restart to occur if changes are made; default: 'true'
+A.1.3. addon list
+Lists add-ons installed in the $ROO_HOME/add-ons directory
+This command does not accept any options.
+A.1.4. addon uninstall
+Removes an existing add-on from the $ROO_HOME/add-ons directory
+--pattern The filename pattern to remove; no default value (mandatory)
+--automaticRestart Causes an automatic shell restart to occur if changes are made; default: 'true'
+addon cleanup
+addon install --url
+addon list
+addon uninstall --pattern
+1.0.2.RELEASE	53
+Command Index
+A.2. Backup Commands
+Backup Commands are contained in org.springframework.roo.addon.backup.BackupCommands.
+A.2.1. backup
+Backup your project to a zip file
+This command does not accept any options.
+A.3. Bootstrap Commands
+Bootstrap Commands are contained in org.springframework.roo.bootstrap.BootstrapCommands.
+A.3.1. development mode
+Switches the system into development mode (greater diagnostic information)
+--enabled Activates development mode; default: 'true'
+A.3.2. poll now
+Perform a manual file system poll
+This command does not accept any options.
+A.3.3. poll speed
+Changes the file system polling speed
+--ms The number of milliseconds between each poll; no default value (mandatory)
+backup
+development mode
+poll now
+poll speed --ms
+A.3.4. poll status
+Display file system polling information
+This command does not accept any options.
+A.4. Classpath Commands
+Classpath	Commands	are org.springframework.roo.classpath.operations.ClasspathCommands.
+contained	in
+poll status
+1.0.2.RELEASE
+54
+Command Index
+A.4.1. class
+Creates a new Java class source file in any project path
+--class The name of the class to create; no default value (mandatory)
+--rooAnnotations Whether the generated class should have common Roo annotations; default if option present: 'true'; default if option not present: 'false'
+--path Source directory to create the class in; default: 'SRC_MAIN_JAVA'
+--extends The superclass (defaults to java.lang.Object); default if option not present: 'java.lang.Object'
+--abstract Whether the generated class should be marked as abstract; default if option present: 'true'; default if option not present: 'false'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.4.2. dod
+Creates a new data on demand for the specified entity
+--entity The entity which this data on demand class will create and modify as required; default if option not present: '*'
+--class The class which will be created to hold this data on demand provider (defaults to the entity name + 'DataOnDemand'); no default value
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.4.3. entity
+Creates a new JPA persistent entity in SRC_MAIN_JAVA
+--class Name of the entity to create; no default value (mandatory)
+class --class
+dod
+entity --class
+1.0.2.RELEASE	55
+Command Index
+--extends The superclass (defaults to java.lang.Object); default if option not present: 'java.lang.Object'
+--abstract Whether the generated class should be marked as abstract; default if option present: 'true'; default if option not present: 'false'
+--testAutomatically Create automatic integration tests for this entity; default if option present: 'true'; default if option not present: 'false'
+--table The JPA table name to use for this entity; no default value
+--identifierField The JPA identifier field name to use for this entity; no default value
+--identifierColumn The JPA identifier field column to use for this entity; no default value
+--identifierType The data type that will be used for the JPA identifier field (defaults to java.lang.Long); default: 'java.lang.Long'
+--inheritanceType The JPA @Inheritance value; no default value
+--mappedSuperclass Apply @MappedSuperclass for this entity; default if option present: 'true'; default if option not present: 'false'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.4.4. enum constant
+Inserts a new enum constant into an enum
+--class The name of the enum class to receive this field; default if option not present: '*'
+--name The name of the constant; no default value (mandatory)
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.4.5. enum type
+Creates a new Java enum source file in any project path
+enum constant --name
+1.0.2.RELEASE	56
+Command Index
+enum type --class
+--class The name of the enum to create; no default value (mandatory)
+--path Source directory to create the enum in; default: 'SRC_MAIN_JAVA'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.4.6. interface
+Creates a new Java interface source file in any project path
+--class The name of the interface to create; no default value (mandatory)
+--path Source directory to create the interface in; default: 'SRC_MAIN_JAVA'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.4.7. test integration
+Creates a new integration test for the specified entity
+--entity The name of the entity to create an integration test for; default if option not present: '*'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.5. Controller Commands
+Controller	Commands	are	contained	in org.springframework.roo.addon.web.mvc.controller.ControllerCommands.
+A.5.1. controller all
+Scaffold a controller for all entities without an existing controller
+--package The package in which new controllers will be placed; no default value (mandatory)
+interface --class
+test integration
+controller all --package
+1.0.2.RELEASE	57
+Command Index
+A.5.2. controller scaffold
+Create a new scaffold Controller (ie where we maintain CRUD automatically)
+--class The path and name of the controller object to be created; no default value (mandatory)
+--entity The name of the entity object which the controller exposes to the web tier; default if option not present: '*'
+--path The base path under which the controller listens for RESTful requests (defaults to the simple name of the form backing object); no default value
+--disallowedOperations A comma separated list of operations (only create, update, delete allowed) that should not be generated in the controller; no default value
+A.6. Field Commands
+Field Commands are contained in org.springframework.roo.classpath.operations.FieldCommands.
+A.6.1. field boolean
+Adds a private boolean field to an existing Java source file
+--fieldName The name of the field to add; no default value (mandatory)
+--class The name of the class to receive this field; default if option not present: '*'
+--notNull Whether this value cannot be null; default if option present: 'true'
+--nullRequired Whether this value must be null; default if option present: 'true'
+--assertFalse Whether this value must assert false; default if option present: 'true'
+--assertTrue Whether this value must assert true; default if option present: 'true'
+--column The JPA column name; no default value
+--comment An optional comment for JavaDocs; no default value
+controller scaffold --class
+field boolean --fieldName
+1.0.2.RELEASE	58
+Command Index
+--primitive Indicates to use a primitive type; default if option present: 'true'; default if option not present: 'false'
+--transient Indicates to mark the field as transient; default if option present: 'true'; default if option not present: 'false'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.6.2. field date
+Adds a private date field to an existing Java source file
+--fieldName The name of the field to add; no default value (mandatory)
+--type The Java type of the entity; no default value (mandatory)
+--persistenceType The type of persistent storage to be used; no default value
+--class The name of the class to receive this field; default if option not present: '*'
+--notNull Whether this value cannot be null; default if option present: 'true'
+--nullRequired Whether this value must be null; default if option present: 'true'
+--future Whether this value must be in the future; default if option present: 'true'
+--past Whether this value must be in the past; default if option present: 'true'
+--column The JPA column name; no default value
+--comment An optional comment for JavaDocs; no default value
+--transient Indicates to mark the field as transient; default if option present: 'true'; default if option not present: 'false'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+field date --fieldName --type
+1.0.2.RELEASE	59
+Command Index
+--dateFormat Indicates the style of the date format; default: 'SHORT'
+--timeFormat Indicates the style of the time format; default: 'NONE'
+A.6.3. field enum
+Adds a private enum field to an existing Java source file
+--fieldName The name of the field to add; no default value (mandatory)
+--type The enum type of this field; no default value (mandatory)
+--class The name of the class to receive this field; default if option not present: '*'
+--notNull Whether this value cannot be null; default if option present: 'true'
+--nullRequired Whether this value must be null; default if option present: 'true'
+--enumType The fetch semantics at a JPA level; no default value
+--comment An optional comment for JavaDocs; no default value
+--transient Indicates to mark the field as transient; default if option present: 'true'; default if option not present: 'false'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.6.4. field number
+Adds a private numeric field to an existing Java source file
+--fieldName The name of the field to add; no default value (mandatory)
+--type The Java type of the entity; no default value (mandatory)
+--class The name of the class to receive this field; default if option not present: '*'
+field enum --fieldName --type
+field number --fieldName --type
+1.0.2.RELEASE	60
+Command Index
+--notNull Whether this value cannot be null; default if option present: 'true'
+--nullRequired Whether this value must be null; default if option present: 'true'
+--decimalMin The BigDecimal string-based representation of the minimum value; no default value
+--decimalMax The BigDecimal string based representation of the maximum value; no default value
+--min The minimum value; no default value
+--max The maximum value; no default value
+--column The JPA column name; no default value
+--comment An optional comment for JavaDocs; no default value
+--transient Indicates to mark the field as transient; default if option present: 'true'; default if option not present: 'false'
+--primitive Indicates to use a primitive type if possible; default if option present: 'true'; default if option not present: 'false'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.6.5. field other
+Inserts a private field into the specified file
+--fieldName The name of the field; no default value (mandatory)
+--type The Java type of this field; no default value (mandatory)
+--class The name of the class to receive this field; default if option not present: '*'
+--notNull Whether this value cannot be null; default if option present: 'true'
+field other --fieldName --type
+1.0.2.RELEASE	61
+Command Index
+--nullRequired Whether this value must be null; default if option present: 'true'
+--comment An optional comment for JavaDocs; no default value
+--transient Indicates to mark the field as transient; default if option present: 'true'; default if option not present: 'false'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.6.6. field reference
+Adds a private reference field to an existing Java source file (ie the 'many' side of a many-to-one)
+--fieldName The name of the field to add; no default value (mandatory)
+--type The Java type of the entity to reference; no default value (mandatory)
+--class The name of the class to receive this field; default if option not present: '*'
+--notNull Whether this value cannot be null; default if option present: 'true'
+--nullRequired Whether this value must be null; default if option present: 'true'
+--joinColumnName The JPA Join Column name; no default value
+--cardinality The relationship cardinarily at a JPA level; default: 'MANY_TO_ONE'
+--fetch The fetch semantics at a JPA level; no default value
+--comment An optional comment for JavaDocs; no default value
+--transient Indicates to mark the field as transient; default if option present: 'true'; default if option not present: 'false'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+field reference --fieldName --type
+1.0.2.RELEASE	62
+Command Index
+A.6.7. field set
+Adds a private Set field to an existing Java source file (ie the 'one' side of a many-to-one)
+--fieldName The name of the field to add; no default value (mandatory)
+--element The entity which will be contained within the Set; no default value (mandatory)
+--class The name of the class to receive this field; default if option not present: '*'
+--mappedBy The field name on the referenced type which owns the relationship; no default value
+--notNull Whether this value cannot be null; default if option present: 'true'
+--nullRequired Whether this value must be null; default if option present: 'true'
+--sizeMin The minimum number of elements in the collection; no default value
+--sizeMax The maximum number of elements in the collection; no default value
+--cardinality The relationship cardinarily at a JPA level; default: 'MANY_TO_MANY'
+--fetch The fetch semantics at a JPA level; no default value
+--comment An optional comment for JavaDocs; no default value
+--transient Indicates to mark the field as transient; default if option present: 'true'; default if option not present: 'false'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.6.8. field string
+Adds a private string field to an existing Java source file
+--fieldName The name of the field to add; no default value (mandatory)
+field set --fieldName --element
+field string --fieldName
+1.0.2.RELEASE	63
+Command Index
+--class The name of the class to receive this field; default if option not present: '*'
+--notNull Whether this value cannot be null; default if option present: 'true'
+--nullRequired Whether this value must be null; default if option present: 'true'
+--decimalMin The BigDecimal string-based representation of the minimum value; no default value
+--decimalMax The BigDecimal string based representation of the maximum value; no default value
+--sizeMin The minimum string length; no default value
+--sizeMax The maximum string length; no default value
+--regexp The required regular expression pattern; no default value
+--column The JPA column name; no default value
+--comment An optional comment for JavaDocs; no default value
+--transient Indicates to mark the field as transient; default if option present: 'true'; default if option not present: 'false'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.7. Finder Commands
+Finder Commands are contained in org.springframework.roo.addon.finder.FinderCommands.
+A.7.1. finder add
+Install finders in the given target (must be an entity)
+--class The controller or entity for which the finders are generated; default if option not present: '*'
+--finderName The finder string as generated with the 'finder list' command; no default value (mandatory)
+finder add --finderName
+1.0.2.RELEASE	64
+Command Index
+A.7.2. finder list
+List all finders for a given target (must be an entity
+--class The controller or entity for which the finders are generated; default if option not present: '*' (mandatory)
+--depth The depth of attribute combinations to be generated for the finders; default: '1'
+--filter A comma separated list of strings that must be present in a filter to be included; no default value
+A.8. Hint Commands
+Hint Commands are contained in org.springframework.roo.classpath.operations.HintCommands.
+A.8.1. hint
+Provides step-by-step hints and context-sensitive guidance
+--topic The topic for which advice should be provided; no default value
+A.9. Integration Test Commands
+Integration	Test	Commands	are	contained	in org.springframework.roo.addon.test.IntegrationTestCommands.
+A.9.1. test mock
+Creates a mock test for the specified entity
+--entity The name of the entity this mock test is targeting; default if option not present: '*'
+--permitReservedWords Indicates whether reserved words are ignored by Roo; default if option present: 'true'; default if option not present: 'false'
+A.10. J Line Shell
+J Line Shell are contained in org.springframework.roo.shell.jline.JLineShell.
+A.10.1. */
+finder list --class
+hint
+test mock
+End of block comment
+1.0.2.RELEASE	65
+Command Index
+*/
+This command does not accept any options.
+A.10.2.
+A.10.3.
+A.10.4.
+A.10.5.
+A.10.6.
+A.10.7.
+/*
+Start of block comment
+This command does not accept any options.
+//
+Inline comment markers (start of line only)
+This command does not accept any options.
+date
+Displays the local date and time
+This command does not accept any options.
+exit
+Exits the shell
+This command does not accept any options.
+script
+Parses the specified resource file and executes its commands
+--file The file to locate and execute; no default value (mandatory)
+--lineNumbers Display line numbers when executing the script; default if option present: 'true'; default if option not present: 'false'
+system properties
+/*
+//
+date
+exit
+script --file
+Shows the shell's properties
+system properties
+1.0.2.RELEASE	66
+Command Index
+This command does not accept any options.
+A.10.8. version
+Displays shell version
+--[default] Special version flags; no default value
+A.11. Jms Commands
+Jms Commands are contained in org.springframework.roo.addon.jms.JmsCommands.
+A.11.1. field jms template
+insert a JmsTemplate field into an existing type
+--fieldName The name of the field to add; default: 'jmsTemplate'
+--class The name of the class to receive this field; default if option not present: '*'
+A.11.2. jms listener class
+Create a new class which is a asynchronous JMS consumer
+--class The name of the class to create; no default value (mandatory)
+--destinationName The name of the destination; default: 'myDestination'
+--destinationType The type of the destination; default: 'QUEUE'
+A.11.3. jms setup
+Install a JMS provider in your project
+--provider The persistence provider to support; no default value (mandatory)
+--destinationName The name of the destination; default: 'myDestination'
+version
+field jms template
+jms listener class --class
+jms setup --provider
+1.0.2.RELEASE	67
+Command Index
+--destinationType The type of the destination; default: 'QUEUE'
+A.12. Jpa Commands
+Jpa Commands are contained in org.springframework.roo.addon.jpa.JpaCommands.
+A.12.1. database properties list
+Shows database configuration details
+This command does not accept any options.
+A.12.2. database properties remove
+Removes a particular database property
+--key The property key that should be removed; no default value (mandatory)
+A.12.3. database properties set
+Changes a particular database property
+--key The property key that should be changed; no default value (mandatory)
+--value The new vale for this property key; no default value (mandatory)
+A.12.4. persistence setup
+Install or updates a JPA persistence provider in your project
+--provider The persistence provider to support; no default value (mandatory)
+--database The database to support; no default value (mandatory)
+--jndiDataSource The JNDI datasource to use; no default value
+--databaseName The database name to use; no default value
+database properties list
+database properties remove --key
+database properties set --key --value
+persistence setup --provider --database
+1.0.2.RELEASE	68
+Command Index
+--userName The username to use; no default value
+--password The password to use; no default value
+A.13. Jsp Commands
+Jsp Commands are contained in org.springframework.roo.addon.mvc.jsp.JspCommands.
+A.13.1. controller class
+Create a new manual Controller (ie where you write the methods)
+--class The path and name of the controller object to be created; no default value (mandatory)
+--preferredMapping Indicates a specific request mapping path for this controller (eg /foo/); no default value
+A.14. Logging Commands
+Logging Commands are contained in org.springframework.roo.addon.logging.LoggingCommands.
+A.14.1. logging setup
+Configure logging in your project
+--level The log level to configure; no default value (mandatory)
+--package The package to append the logging level to (all by default); no default value
+A.15. Mail Commands
+Mail Commands are contained in org.springframework.roo.addon.email.MailCommands.
+A.15.1. email sender setup
+Install a Spring JavaMailSender in your project
+--hostServer The host server; no default value (mandatory)
+--protocol The protocol used by mail server; no default value
+controller class --class
+logging setup --level
+email sender setup --hostServer
+1.0.2.RELEASE	69
+Command Index
+--port The port used by mail server; no default value
+--encoding The encoding used for mail; no default value
+--username The mail account username; no default value
+--password The mail account password; no default value
+A.15.2. email template setup
+Configures a template for a SimpleMailMessage
+--from The 'from' email (optional); no default value
+--subject The message subject (obtional); no default value
+A.15.3. field email template
+Inserts a MailTemplate field into an existing type
+--fieldName The name of the field to add; default: 'mailTemplate'
+--class The name of the class to receive this field; default if option not present: '*'
+A.16. Maven Commands
+Maven Commands are contained in org.springframework.roo.addon.maven.MavenCommands.
+A.16.1. dependency add
+Adds a new dependency to the Maven project object model (POM)
+--groupId The group ID of the dependency; no default value (mandatory)
+--artifactId The artifact ID of the dependency; no default value (mandatory)
+--version The version of the dependency; no default value (mandatory)
+email template setup
+field email template
+dependency add --groupId --artifactId --version
+1.0.2.RELEASE	70
+Command Index
+A.16.2.
+dependency remove
+dependency remove --groupId --artifactId --version
+A.16.3.
+A.16.4.
+A.16.5.
+A.16.6.
+A.16.7.
+Removes an existing dependency from the Maven project object model (POM)
+--groupId The group ID of the dependency; no default value (mandatory)
+--artifactId The artifact ID of the dependency; no default value (mandatory)
+--version The version of the dependency; no default value (mandatory)
+perform assembly
+Executes the assembly goal via Maven
+This command does not accept any options.
+perform clean
+Executes a full clean (including Eclipse files) via Maven
+This command does not accept any options.
+perform command
+Executes a user-specified Maven command
+--mavenCommand User-specified Maven command (eg test:test); no default value (mandatory)
+perform eclipse
+Sets up Eclipse configuration via Maven (only necessary if you have not installed the m2eclipse plugin in Eclipse)
+This command does not accept any options.
+perform package
+Packages the application using Maven, but does not execute any tests
+perform assembly
+perform clean
+perform command --mavenCommand
+perform eclipse
+perform package
+1.0.2.RELEASE	71
+Command Index
+This command does not accept any options.
+A.16.8. perform tests
+Executes the tests via Maven
+This command does not accept any options.
+A.16.9. project
+Creates a new project
+--topLevelPackage The uppermost package name (this becomes the <groupId> in Maven and also the '~' value when using Roo's shell); no default value (mandatory)
+--projectName The name of the project (last segment of package name used as default); no default value
+--java Forces a particular major version of Java to be used (will be auto-detected if unspecified; specify 5 or 6 or 7 only); no default value
+--template The type of project to create (defaults to STANDARD_PROJECT); default: 'STANDARD_PROJECT'
+A.17. Metadata Commands
+Metadata Commands are contained in org.springframework.roo.classpath.MetadataCommands.
+A.17.1. metadata for id
+Shows detailed information about the metadata item
+--metadataId The metadata ID (should start with MID:); no default value (mandatory)
+A.17.2. metadata for type
+Shows detailed metadata for the indicated type
+--type The Java type name to display metadata for; no default value (mandatory)
+perform tests
+project --topLevelPackage
+metadata for id --metadataId
+metadata for type --type
+1.0.2.RELEASE	72
+Command Index
+A.17.3. metadata status
+Shows metadata statistics
+This command does not accept any options.
+A.17.4. metadata trace
+Traces metadata event delivery notifications
+--level The verbosity of notifications (0=none, 1=some, 2=all); no default value (mandatory)
+A.18. Prop File Commands
+Prop File Commands are contained in org.springframework.roo.addon.propfiles.PropFileCommands.
+A.18.1. properties list
+Shows the details of a particular properties file
+--name Property file name (including .properties suffix); no default value (mandatory)
+--path Source path to property file; no default value (mandatory)
+A.18.2. properties remove
+Removes a particular properties file property
+--name Property file name (including .properties suffix); no default value (mandatory)
+--path Source path to property file; no default value (mandatory)
+--key The property key that should be removed; no default value (mandatory)
+A.18.3. properties set
+Changes a particular properties file property
+metadata status
+metadata trace --level
+properties list --name --path
+properties remove --name --path --key
+properties set --name --path --key --value
+1.0.2.RELEASE	73
+Command Index
+--name Property file name (including .properties suffix); no default value (mandatory)
+--path Source path to property file; no default value (mandatory)
+--key The property key that should be changed; no default value (mandatory)
+--value The new vale for this property key; no default value (mandatory)
+A.19. Security Commands
+Security Commands are contained in org.springframework.roo.addon.security.SecurityCommands.
+A.19.1. security setup
+Install Spring Security into your project
+This command does not accept any options.
+A.20. Selenium Commands
+Selenium	Commands	are	contained	in org.springframework.roo.addon.web.selenium.SeleniumCommands.
+A.20.1. selenium test
+Creates a new Selenium test for a particular controller
+--controller Controller to create a Selenium test for; no default value (mandatory)
+--name Name of the test; no default value
+--serverUrl URL of the server where the web application is available, including protocol, port and hostname; default: 'http://localhost:8080/'
+A.21. Simple Parser
+Simple Parser are contained in org.springframework.roo.shell.SimpleParser.
+A.21.1. help
+security setup
+selenium test --controller
+Shows system help
+1.0.2.RELEASE	74
+Command Index
+help
+--command Command name to provide help for; no default value
+A.21.2. reference guide
+Writes the reference guide XML fragments (in DocBook format) into the current working directory
+This command does not accept any options.
+A.22. Web Flow Commands
+Web Flow Commands are contained in org.springframework.roo.addon.web.flow.WebFlowCommands.
+A.22.1. web flow
+Install Spring Web Flow configuration artifacts into your project
+--flowName The name for your web flow; no default value

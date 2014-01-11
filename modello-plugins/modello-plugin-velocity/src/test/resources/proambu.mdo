@@ -1,0 +1,1736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model uml.lastModified="1285762250000" author="&#xA;            Effervens" jpa.unit="proambu" jpa.version="2.0" xsd.namespace="http://www.proambu.com/schemas/proambu/1.0.0" xsd.targetNamespace="http://www.proambu.com/schemas/proambu/1.0.0" sc.appName="Proambu" sc.sproutPath="/Users/ludo/Workspaces/SproutCore/abbot" sc.targetPath="sproutcore" sc.backend="127.0.0.1:8080">
+  <version>1.0.0</version>
+  <name>ProAmbu</name>
+  <defaults>
+    <default>
+      <key>defaultImports</key>
+      <value>javax.persistence.*,javax.xml.bind.annotation.*,javax.ws.rs.*,javax.ws.rs.core.*,java.util.*,org.apache.openjpa.kernel.*,org.apache.openjpa.persistence.*,javax.persistence.Query,java.lang.reflect.Array,com.jsonapps.commons.*</value>
+    </default>
+    <default>
+      <key>package</key>
+      <value>com.effervens.proambu</value>
+    </default>
+  </defaults>
+  <interfaces>
+    <interface>
+      <name>Service</name>
+      <packageName>com.jsonapps.services</packageName>
+      <version>1.0.0</version>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void init();
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void stop();
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void start();
+</code>
+        </codeSegment>
+      </codeSegments>
+    </interface>
+  </interfaces>
+  <classes>
+    <class jpa.entity="true" sc.generators="model,view,controller">
+      <name>Client</name>
+      <packageName>com.effervens.proambu.model</packageName>
+      <annotations>
+        <annotation>@Entity</annotation>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Table(name="clients",uniqueConstraints={@UniqueConstraint(columnNames="client_id")})</annotation>
+        <annotation>@XmlAccessorType(XmlAccessType.FIELD)</annotation>
+        <annotation>@FormClass(name="Client")</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>BaseObject</superClass>
+      <fields>
+        <field>
+          <name>nomClient</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@FormField(name="Nom",order=1)</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>prenomClient</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@FormField(name="Prénom",order=2)</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>dateNaissanceClient</name>
+          <type>Date</type>
+          <annotations>
+            <annotation>@FormField(name="Date de naissance",order=3)</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>infoComplementaireClient</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@FormField(name="Informations complémentaires",order=4)</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>numSecuriteSocialClient</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@FormField(name="Numéro de sécurité sociale",order=5)</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>codeOrganisme</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@FormField(name="Code org.",order=6)</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="client_seq", sequenceName="client_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="client_seq")</annotation>
+            <annotation>@Column(name="client_id")</annotation>
+            <annotation>@FormField(name="ID",visible=false)</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>transports</name>
+          <annotations>
+            <annotation>@FormField(name="Transports",visible=false)</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>Transport</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>mutuelle</name>
+          <annotations>
+            <annotation>@FormField(name="Mutuelle")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>Mutuelle</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>adresseClient</name>
+          <annotations>
+            <annotation>@FormField(name="Adresse")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>Adresse</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+      </fields>
+    </class>
+    <class jpa.entity="true" sc.generators="model,view,controller">
+      <name>Compagnie</name>
+      <packageName>com.effervens.proambu.model</packageName>
+      <annotations>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Entity</annotation>
+        <annotation>@Table(name="compagnies",uniqueConstraints={@UniqueConstraint(columnNames="compagnie_id")})</annotation>
+        <annotation>@XmlAccessorType(XmlAccessType.FIELD)</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>BaseObject</superClass>
+      <fields>
+        <field>
+          <name>nomCompagnie</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@FormField(name="Nom")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@SequenceGenerator(name="compagnie_seq", sequenceName="compagnie_pk_seq")</annotation>
+            <annotation>@Id</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="compagnie_seq")</annotation>
+            <annotation>@Column(name="compagnie_id")</annotation>
+            <annotation>@FormField(name="ID",visible=false)</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>interne</name>
+          <type>Boolean</type>
+          <modifier>public</modifier>
+          <annotations>
+            <annotation>@FormField(name="Interne")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>vehicules</name>
+          <annotations>
+            <annotation>@XmlIDREF</annotation>
+            <annotation>@FormField(name="Véhicules")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>Vehicule</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>adresse</name>
+          <annotations>
+            <annotation>@FormField(name="Adresse")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>Adresse</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>prescriptionMedicalTransports</name>
+          <annotations>
+            <annotation>@FormField(name="Prescriptions médicales")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>PrescriptionMedicalTransport</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <description>une compagnie
+                        peut posseder plusieurs vehicules creer un
+                        vehicule qui reponds a toute les
+                        obligations</description>
+          <version>1.0.0</version>
+          <code>  public void creerVehiculePourCompagnie() {
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class jpa.entity="true">
+      <name>Equipage</name>
+      <packageName>com.effervens.proambu.model</packageName>
+      <annotations>
+        <annotation>@Table(name="equipages",uniqueConstraints={@UniqueConstraint(columnNames="equipage_id")})</annotation>
+        <annotation>@Entity</annotation>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@XmlAccessorType(XmlAccessType.FIELD)</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>BaseObject</superClass>
+      <fields>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="equipage_seq", sequenceName="equipage_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="equipage_seq")</annotation>
+            <annotation>@Column(name="equipage_id")</annotation>
+            <annotation>@FormField(name="ID",visible=false)</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>vehicule</name>
+          <annotations>
+            <annotation>@XmlIDREF</annotation>
+            <annotation>@FormField(name="Véhicule")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>Vehicule</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>personnels</name>
+          <annotations>
+            <annotation>@ManyToMany</annotation>
+            <annotation>@XmlIDREF</annotation>
+            <annotation>@FormField(name="Membres d'équipage")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>Personnel</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <description>- creer un
+                        equipage par societe un equipage dois
+                        obligatoirement etre constitue d'un bns et
+                        d'un cca sinon "impossible de creer
+                        l'equipage"</description>
+          <version>1.0.0</version>
+          <code>  public void creerEquipageDePersonne() {
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class jpa.entity="true">
+      <name>Mutuelle</name>
+      <packageName>com.effervens.proambu.model</packageName>
+      <annotations>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Entity</annotation>
+        <annotation>@Table(name="mutuelles",uniqueConstraints={@UniqueConstraint(columnNames="mutuelle_id")})</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>BaseObject</superClass>
+      <fields>
+        <field>
+          <name>nomMutuelle</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@FormField(name="Nom")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>tiersPayants</name>
+          <type>Boolean</type>
+          <annotations>
+            <annotation>@FormField(name="Tiers payant")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>contratSignerMutuelle</name>
+          <type>Boolean</type>
+          <annotations>
+            <annotation>@FormField(name="Contrat signé")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="mutuelle_seq", sequenceName="mutuelle_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="mutuelle_seq")</annotation>
+            <annotation>@Column(name="mutuelle_id")</annotation>
+            <annotation>@FormField(name="ID",visible=false)</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>clients</name>
+          <annotations>
+            <annotation>@FormField(name="Clients")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>Client</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+      </fields>
+    </class>
+    <class jpa.entity="true">
+      <name>Personnel</name>
+      <packageName>com.effervens.proambu.model</packageName>
+      <annotations>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Entity</annotation>
+        <annotation>@Table(name="personnels",uniqueConstraints={@UniqueConstraint(columnNames="personnel_id")})</annotation>
+        <annotation>@XmlAccessorType(XmlAccessType.FIELD)</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>BaseObject</superClass>
+      <fields>
+        <field>
+          <name>nomPersonnel</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@FormField(name="Nom")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>dateEntreeSociete</name>
+          <type>Date</type>
+          <annotations>
+            <annotation>@FormField(name="Date d'entrée dans la société")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>dateSortieSociete</name>
+          <type>Date</type>
+          <annotations>
+            <annotation>@FormField(name="Date de sortie de la société")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>qualification</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@FormField(name="Qualification")</annotation>
+          </annotations>
+          <description>bns (brevet
+                        national secoursite) ou cca (certificat
+                        capacite
+                        ambulancier)</description>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>dateVisiteMedical</name>
+          <type>Date</type>
+          <annotations>
+            <annotation>@FormField(name="Date visite médicale")</annotation>
+          </annotations>
+          <description>visite
+                        renouvelable tous les 5 ans, si date
+                        depasser "impossible selectionner cette
+                        personne"</description>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>poste</name>
+          <type>String</type>
+          <description>une personne,
+                        comme par exemple les cogerants peuvent
+                        travailler dans plusieurs
+                        societe</description>
+          <annotations>
+            <annotation>@FormField(name="Poste")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="personnel_seq",sequenceName="personnel_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="personnel_seq")</annotation>
+            <annotation>@Column(name="personnel_id")</annotation>
+            <annotation>@FormField(name="ID",visible=false)</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>equipages</name>
+          <annotations>
+            <annotation>@ManyToMany</annotation>
+            <annotation>@XmlIDREF</annotation>
+            <annotation>@FormField(name="Equipages")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>Equipage</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <description>-renvoi un nom
+                        parmis le personnel d'une societe -ne peut
+                        renvoyer qu'une personne travaillant
+                        toujours dans la societe :
+                        dateSortieSociete = null qualification deux
+                        valeurs possibles : bns ou
+                        cca</description>
+          <version>1.0.0</version>
+          <code>  public void renvoiNomPersonneValide() {
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <description>- afficher
+                        information personne - possibilite de
+                        pourvoir completer ou modifier les
+                        informations relative a la
+                        personne</description>
+          <version>1.0.0</version>
+          <code>  public void afficherInformationPersonnel() {
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class jpa.entity="true" sc.generators="model,view,controller">
+      <name>PrescriptionMedicalTransport</name>
+      <packageName>com.effervens.proambu.model</packageName>
+      <description>Prescription medicale de transport (Pmt)</description>
+      <annotations>
+        <annotation>@Entity</annotation>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Table(name="prescriptionMedicalTransports",uniqueConstraints={@UniqueConstraint(columnNames="prescriptionMedicalTransport_id")})</annotation>
+        <annotation>@XmlAccessorType(XmlAccessType.FIELD)</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>BaseObject</superClass>
+      <fields>
+        <field>
+          <name>nomClient</name>
+          <type>String</type>
+          <description>Nom
+                        client</description>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>datePrescription</name>
+          <type>Date</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>nbTransport</name>
+          <type>int</type>
+          <description>Nombre de
+                        transports</description>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>nomPrescripteurPmt</name>
+          <type>String</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>nomDetenteurPmt</name>
+          <type>String</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>sourceTransp</name>
+          <type>String</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Column(name="prescriptionMedicalTransport_id")</annotation>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="prescriptionMedicalTransport_seq", sequenceName="prescriptionMedicalTransport_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="prescriptionMedicalTransport_seq")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>transports</name>
+          <version>1.0.0</version>
+          <association>
+            <type>Transport</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>compagnie</name>
+          <version>1.0.0</version>
+          <association>
+            <type>Compagnie</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void transportSerie() {
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class jpa.entity="true" rootElement="true" sc.generators="model,view,controller">
+      <name>Transport</name>
+      <packageName>com.effervens.proambu.model</packageName>
+      <annotations>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Entity</annotation>
+        <annotation>@Table(name="transports",uniqueConstraints={@UniqueConstraint(columnNames="transport_id")})</annotation>
+        <annotation>@XmlAccessorType(XmlAccessType.FIELD)</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>BaseObject</superClass>
+      <fields>
+        <field>
+          <name>dateRdv</name>
+          <type>Date</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>zoneDepose</name>
+          <type>String</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>zonePriseEnCharge</name>
+          <type>String</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>datePriseEnCharge</name>
+          <type>Date</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>numeroTransportSerie</name>
+          <type>int</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>observations</name>
+          <type>String</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>nomCompagnieApporteurAffaire</name>
+          <type>String</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="transport_seq", sequenceName="transport_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="transport_seq")</annotation>
+            <annotation>@Column(name="transport_id")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>pmTransport</name>
+          <version>1.0.0</version>
+          <association>
+            <type>PrescriptionMedicalTransport</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>client</name>
+          <annotations>
+            <annotation>@XmlIDREF</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>Client</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>vehicule</name>
+          <version>1.0.0</version>
+          <association>
+            <type>Vehicule</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>typeTransport</name>
+          <version>1.0.0</version>
+          <association>
+            <type>TypeTransport</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>adressePriseEnCharge</name>
+          <version>1.0.0</version>
+          <association>
+            <type>Adresse</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>adresseDepose</name>
+          <version>1.0.0</version>
+          <association>
+            <type>Adresse</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void ajouterTransport() {
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void ajouterTransportSerie() {
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class jpa.entity="true" sc.generators="model,view,controller">
+      <name>Vehicule</name>
+      <packageName>com.effervens.proambu.model</packageName>
+      <annotations>
+        <annotation>@Entity</annotation>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Table(name="vehicules",uniqueConstraints={@UniqueConstraint(columnNames="vehicule_id")})</annotation>
+        <annotation>@XmlAccessorType(XmlAccessType.FIELD)</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>BaseObject</superClass>
+      <fields>
+        <field>
+          <name>immatriculation</name>
+          <type>String</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>controlTechnique</name>
+          <type>Date</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>nomCompagnie</name>
+          <type>String</type>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="vehicule_seq", sequenceName="vehicule_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="vehicule_seq")</annotation>
+            <annotation>@Column(name="vehicule_id")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>equipage</name>
+          <version>1.0.0</version>
+          <association>
+            <type>Equipage</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>compagnie</name>
+          <annotations>
+            <annotation>@XmlIDREF</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>Compagnie</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <description>- assigner un
+                        equipage a un vehicule - ne proposer que
+                        les equipage travaillant dans la
+                        societe</description>
+          <version>1.0.0</version>
+          <code>  public void creerEquipageDansVehicule() {
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class jpa.entity="true" sc.generators="model,view,controller">
+      <name>TypeTransport</name>
+      <packageName>com.effervens.proambu.model</packageName>
+      <annotations>
+        <annotation>@Entity</annotation>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Table(name="typeTransports",uniqueConstraints={@UniqueConstraint(columnNames="typeTransport_id")})</annotation>
+        <annotation>@XmlAccessorType(XmlAccessType.FIELD)</annotation>
+        <annotation>@FormClass(name="Type de transport")</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <fields>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Column(name="typeTransport_id")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="typeTransport_seq")</annotation>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="typeTransport_seq", sequenceName="typeTransport_pk_seq")</annotation>
+            <annotation>@FormField(visible=false)</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>label</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@FormField(name="Nom")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+      </fields>
+    </class>
+    <class jpa.entity="true" sc.generators="model,view,controller">
+      <name>Adresse</name>
+      <packageName>com.effervens.proambu.model</packageName>
+      <annotations>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Entity</annotation>
+        <annotation>@Table(name="adress",uniqueConstraints={@UniqueConstraint(columnNames="address_id")})</annotation>
+        <annotation>@XmlAccessorType(XmlAccessType.FIELD)</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>BaseObject</superClass>
+      <fields>
+        <field>
+          <name>nom</name>
+          <type>String</type>
+          <modifier>public</modifier>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>address1</name>
+          <type>String</type>
+          <modifier>public</modifier>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>address2</name>
+          <type>String</type>
+          <modifier>public</modifier>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <modifier>public</modifier>
+          <annotations>
+            <annotation>@Column(name="address_id")</annotation>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="address_seq", sequenceName="address_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="address_seq")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>city</name>
+          <type>String</type>
+          <modifier>public</modifier>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>department</name>
+          <type>String</type>
+          <modifier>public</modifier>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>country</name>
+          <type>String</type>
+          <modifier>public</modifier>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>zipcode</name>
+          <type>String</type>
+          <modifier>public</modifier>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>fax</name>
+          <type>String</type>
+          <modifier>public</modifier>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>email</name>
+          <type>String</type>
+          <modifier>public</modifier>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>phone1</name>
+          <type>String</type>
+          <modifier>public</modifier>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>phone2</name>
+          <type>String</type>
+          <modifier>public</modifier>
+          <version>1.0.0</version>
+        </field>
+      </fields>
+    </class>
+    <class>
+      <name>BaseObject</name>
+      <packageName>com.effervens.proambu.model</packageName>
+      <version>1.0.0</version>
+      <codeSegments>
+        <codeSegment>
+          <annotations>
+            <annotation>@XmlID</annotation>
+            <annotation>@XmlAttribute(name="oid")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public String getIdentityString() {
+return ""+getId();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public int getId() {
+  return 0;
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class jaxrs.urls="/params/,/params/*">
+      <name>ConfigurationService</name>
+      <packageName>com.jsonapps.services</packageName>
+      <annotations>
+        <annotation>@Path("/params")</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>JPAService</superClass>
+      <fields>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <modifier>public</modifier>
+          <annotations>
+            <annotation>@PathParam("paramId")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>parameters</name>
+          <version>1.0.0</version>
+          <association>
+            <type>Param</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <annotations>
+            <annotation>@GET</annotation>
+            <annotation>@Produces({ "application/json", "application/xml" })</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public List&lt;Param&gt; getParams() {
+        Query q = getEm().createQuery("SELECT p FROM Param p");
+        return (List&lt;Param&gt;) q.getResultList();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <description>Collection: List the members of the collection. For example list all the cars for sale.
+	Member: Retrieve the addressed member of the collection
+	</description>
+          <annotations>
+            <annotation>@Path("/{paramId : [0-9]+}")</annotation>
+            <annotation>@GET</annotation>
+            <annotation>@Produces({ "application/json", "application/xml" })</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public Param getParamById(@PathParam("paramId") int id) {
+	Query q = getEm().createQuery("SELECT p FROM Param p WHERE p.param_id = :pid");
+	q.setParameter("pid", id);
+	return (Param) q.getSingleResult();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <description>Collection: Not generally used. Meaning defined as replace the entire collection with another entire collection.
+	Member: Update the addressed member of the collection or create it with a defined ID.
+	</description>
+          <annotations>
+            <annotation>@Consumes({ "application/json", "application/xml" })</annotation>
+            <annotation>@Path("/{paramId : [0-9]+}")</annotation>
+            <annotation>@PUT</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public void updateParam(Param param, @PathParam("paramId") int id) {
+	this.persist(param);
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <description>Collection: Create a new entry in the collection where the ID is assigned automatically by the collection. The ID created is typically returned by this operation.
+	Member: Not generally used.</description>
+          <annotations>
+            <annotation>@POST</annotation>
+            <annotation>@Consumes({ "application/json", "application/xml" })</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public Param createParam(Param param) {
+	if (param == null)
+		param = new Param();
+	this.persist(param);
+	return param;
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <description>Collection: Not generally used. Meaning defined as delete the entire collection.
+	Member: Delete the addressed member of the collection.
+	</description>
+          <annotations>
+            <annotation>@DELETE</annotation>
+            <annotation>@Path("/{paramId : [0-9]+}")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public void deleteParamById(@PathParam("paramId") int id) {
+	Param u = getEm().find(Param.class, id);
+	getEm().clear();
+	this.remove(u);
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void setParamValue(String paramName, String paramValue) {
+    EntityManager ems = getEm();
+    Query q = ems.createQuery("SELECT p FROM Param p WHERE p.name = :paramName");
+    q.setParameter("paramName", paramName);
+    Param p = (Param) q.getSingleResult();
+    if (p == null) {
+        p = new Param();
+        p.setName(paramName);
+        p.setValue(paramValue);
+    } else {
+        p.setValue(paramValue);
+    }
+    Broker broker = getBrokerFactory().newBroker();
+    broker.begin();
+    ems.clear();
+    Object tmpl = broker.attach(p, false, null);
+    broker.persist(tmpl, null);
+    broker.commit();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public String getParamValue(String paramName) {
+      Query q = getEm().createQuery("SELECT p FROM Param p WHERE p.name = :paramName");
+      q.setParameter("paramName", paramName);
+      Param p = (Param) q.getSingleResult();
+      return p.getValue();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public ConfigurationService(String persistentUnit) {
+	super(persistentUnit);
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class>
+      <name>DefaultService</name>
+      <packageName>com.jsonapps.services</packageName>
+      <version>1.0.0</version>
+      <interfaces>
+        <interface>com.jsonapps.services.Service</interface>
+      </interfaces>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void init() {
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void stop() {
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void start() {
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class jaxrs.urls="/users/,/users/*">
+      <name>UsersService</name>
+      <packageName>com.jsonapps.services</packageName>
+      <annotations>
+        <annotation>@Path("/users")</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>JPAService</superClass>
+      <codeSegments>
+        <codeSegment>
+          <annotations>
+            <annotation>@GET</annotation>
+            <annotation>@Produces({ "application/json", "application/xml" })</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public List&lt;User&gt; getUsers() {
+        Query q = getEm().createQuery("SELECT u FROM User u");
+        return (List&lt;User&gt;) q.getResultList();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@GET</annotation>
+            <annotation>@Path("/{userId : [0-9]+}")</annotation>
+            <annotation>@Produces({ "application/json", "application/xml" })</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public User getUserById(@PathParam("userId") int id) {
+	Query q = getEm().createQuery("SELECT u FROM User u WHERE u.user_id = :uid");
+	q.setParameter("uid", id);
+	 return (User) q.getSingleResult();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@PUT</annotation>
+            <annotation>@Path("/{userId : [0-9]+}")</annotation>
+            <annotation>@Consumes({ "application/json", "application/xml" })</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public void updateUser(@PathParam("userId") int id, User user) {
+	this.persist(user);
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@POST</annotation>
+            <annotation>@Consumes({ "application/json", "application/xml" })</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public User createUser(User user) {
+	if (user==null)
+		user = new User();
+	this.persist(user);
+	return user;
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@DELETE</annotation>
+            <annotation>@Path("/{userId : [0-9]+}")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public void deleteUserById(@PathParam("userId") int id) {
+	User u = getEm().find(User.class, id);
+	getEm().clear();
+	this.remove(u);
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public UsersService(String persistentUnit) {
+	super(persistentUnit);
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class>
+      <name>JPAService</name>
+      <packageName>com.jsonapps.services</packageName>
+      <version>1.0.0</version>
+      <superClass>DefaultService</superClass>
+      <fields>
+        <field>
+          <name>em</name>
+          <type>javax.persistence.EntityManager</type>
+          <modifier>protected</modifier>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>emf</name>
+          <type>javax.persistence.EntityManagerFactory</type>
+          <modifier>protected</modifier>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>persistentUnit</name>
+          <type>String</type>
+          <modifier>public</modifier>
+          <version>1.0.0</version>
+        </field>
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public JPAService() {
+        this.init();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  protected org.apache.openjpa.kernel.BrokerFactory getBrokerFactory() {
+	return JPAFacadeHelper.toBrokerFactory(getEmf());
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  protected Object persist(Object ob) {
+	Broker broker = getBrokerFactory().newBroker();
+	Object tmpl = broker.attach(ob, false, null);
+	broker.begin();        
+	broker.persist(tmpl, null);
+	Object id = broker.getObjectId(tmpl);
+	broker.commit();
+	broker.detach(tmpl, null);
+	broker.close();
+	return id;
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  protected void remove(Object ob) {
+	Broker broker = getBrokerFactory().newBroker();
+	Object tmpl = broker.attach(ob, false, null);
+	broker.begin();
+	broker.delete(tmpl, null);        
+	broker.commit();
+	broker.detach(tmpl, null);
+	broker.close();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  protected void startTx(javax.persistence.EntityManager em) {
+	getEm().getTransaction().begin();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  protected boolean isActiveTx(javax.persistence.EntityManager em) {
+	return getEm().getTransaction().isActive();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  protected void endTx(javax.persistence.EntityManager em) {
+	if (getEm().getTransaction().isActive()) {
+		if (getEm().getTransaction().getRollbackOnly())
+			getEm().getTransaction().rollback();
+		else
+			getEm().getTransaction().commit();
+	}
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void rollbackTx(javax.persistence.EntityManager em) {
+	getEm().getTransaction().rollback();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void endEm(javax.persistence.EntityManager em) {
+	if (getEm().isOpen())
+		getEm().close();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public JPAService(String persistentUnit) {
+	this.persistentUnit = persistentUnit;
+	this.init();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void init() {
+      // Don't modify system props, as we are trying to get as close as
+      // possible to testing props in persistence.xml
+      HashMap props = new HashMap(System.getProperties());
+      //props.put("openjpa.AutoDetach", "commit,close,nontx-read");
+      emf = Persistence
+              .createEntityManagerFactory(persistentUnit, props);
+      em = emf.createEntityManager();   
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class jaxrs.urls="/crud/,/crud/*">
+      <name>CRUDService</name>
+      <packageName>com.jsonapps.services</packageName>
+      <annotations>
+        <annotation>@Path("/crud")</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>JPAService</superClass>
+      <fields>
+        <field>
+          <name>mappings</name>
+          <type>java.util.Map&lt;String,Class&gt;</type>
+          <modifier>protected</modifier>
+          <version>1.0.0</version>
+        </field>
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public CRUDService() {
+	super();
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@GET</annotation>
+            <annotation>@Path("/internal/types")</annotation>
+            <annotation>@Produces({ "application/json", "application/xml" })</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public GenericEntity&lt;Map&lt;String,String&gt;&gt; getMappingsAsString() {
+	Map&lt;String,String&gt; result = new HashMap&lt;String,String&gt;();
+	for (String k : mappings.keySet()) {
+		result.put(k, mappings.get(k).getName());
+	}
+	GenericEntity&lt;Map&lt;String,String&gt;&gt; entity = new GenericEntity&lt;Map&lt;String,String&gt;&gt;(result) {};
+	return entity;
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@POST</annotation>
+            <annotation>@Produces({ "application/json", "application/xml" })</annotation>
+            <annotation>@Path("/internal/types/{type}")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public void addMapping(@PathParam("type") String type, @QueryParam("className") String clazzName) {
+	try {
+		mappings.put(type, Class.forName(clazzName));
+	} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+	}
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void addMapping(String type, Class clazz) {
+	mappings.put(type, clazz);
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@POST</annotation>
+            <annotation>@Consumes({ "application/json", "application/xml" })</annotation>
+            <annotation>@Path("/{type}")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public Object createBean(@PathParam("type") String type, Object bean) {
+	if (mappings.containsKey(type)) {
+		if (bean==null)
+			try {
+				bean = mappings.get(type).newInstance();
+			} catch (Exception e) {
+				// TODO
+				e.printStackTrace();
+			}
+		this.persist(bean);
+		return bean;
+	}
+	return null;
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@DELETE</annotation>
+            <annotation>@Path("/{type}/{oid : [0-9]+}")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public void deleteBeanById(@PathParam("type") String type, @PathParam("oid") int id) {
+	if (mappings.containsKey(type)) {
+		Object u = getEm().find(mappings.get(type), id);
+		getEm().clear();
+		this.remove(u);
+	}
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@GET</annotation>
+            <annotation>@Produces({ "application/json", "application/xml" })</annotation>
+            <annotation>@Path("/{type}/{oid : [0-9]+}")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public Object getBeanById(@PathParam("type") String type, @PathParam("oid") int id) {
+	if (mappings.containsKey(type)) {
+		return getEm().find(mappings.get(type), id);
+	}
+	return null;
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@GET</annotation>
+            <annotation>@Produces({ "application/json", "application/xml" })</annotation>
+            <annotation>@Path("/{type}")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public Object[] getBeans(@PathParam("type") String type) {
+    if (mappings.containsKey(type)) {
+        Class clazz = mappings.get(type);
+        Query q = getEm().createQuery("SELECT o FROM "+clazz.getSimpleName()+" o");
+        List list = q.getResultList();
+        Object[] template = (Object[]) Array.newInstance( clazz, list.size() );
+        return list.toArray( template );
+    }
+    return null;
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@GET</annotation>
+            <annotation>@Produces({ "application/json", "application/xml" })</annotation>
+            <annotation>@Path("/internal/types/{type}")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public String getMapping(@PathParam("type") String type) {
+	if (this.hasMapping(type))
+		return mappings.get(type).getName();
+	return null;	
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public boolean hasMapping(String type) {
+	return mappings.containsKey(type);
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@DELETE</annotation>
+            <annotation>@Produces({ "application/json", "application/xml" })</annotation>
+            <annotation>@Path("/internal/types/{type}")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public void removeMapping(@PathParam("type") String type) {
+	if (this.hasMapping(type))
+		mappings.remove(type);
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <annotations>
+            <annotation>@PUT</annotation>
+            <annotation>@Consumes({ "application/json", "application/xml" })</annotation>
+            <annotation>@Path("/{type}/{oid : [0-9]+}")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <code>  public void updateBean(@PathParam("type") String type, @PathParam("oid") int id, Object bean) {
+	if (mappings.containsKey(type))
+		this.persist(bean);
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public CRUDService(String persistentUnit) {
+	super(persistentUnit);
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void init() {
+	super.init();
+	mappings = new HashMap&lt;String,Class&gt;();
+	mappings.put("params", Param.class);
+	mappings.put("users", User.class);
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public void createNewBean() {
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class jpa.entity="true" sc.generators="model,view,controller">
+      <name>AppUser</name>
+      <packageName>com.jsonapps.model.users</packageName>
+      <annotations>
+        <annotation>@Entity</annotation>
+        <annotation>@Table(name="users",uniqueConstraints={@UniqueConstraint(columnNames="user_id"),@UniqueConstraint(columnNames="login")})</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <fields>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="user_seq", sequenceName="user_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user_seq")</annotation>
+            <annotation>@Column(name="user_id")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>login</name>
+          <type>String</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Column(name="login")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>password</name>
+          <type>String</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Column(name="password")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>email</name>
+          <type>String</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Column(name="mail")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>expirationDate</name>
+          <type>Date</type>
+          <modifier>protected</modifier>
+          <annotations>
+            <annotation>@Column(name="exp_date")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>groups</name>
+          <annotations>
+            <annotation>@ManyToMany</annotation>
+            <annotation>@JoinTable(name="users_group",inverseJoinColumns=@JoinColumn(name="group_id", referencedColumnName="group_id"),joinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"))</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>UserGroup</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+      </fields>
+    </class>
+    <class jpa.entity="true">
+      <name>AdminUser</name>
+      <packageName>com.jsonapps.model.users.admin</packageName>
+      <annotations>
+        <annotation>@Entity</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <superClass>AppUser</superClass>
+      <fields>
+        <field>
+          <name>admin</name>
+          <type>boolean</type>
+          <modifier>public</modifier>
+          <annotations>
+            <annotation>@Column(name="user_fl_admin")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>adminLevel</name>
+          <type>int</type>
+          <modifier>public</modifier>
+          <annotations>
+            <annotation>@Column(name="admin_level")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+      </fields>
+    </class>
+    <class jpa.entity="true" sc.generators="model,view,controller">
+      <name>UserGroup</name>
+      <packageName>com.jsonapps.model.users</packageName>
+      <annotations>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Entity</annotation>
+        <annotation>@Table(name="groups",uniqueConstraints={@UniqueConstraint(columnNames="group_id"),@UniqueConstraint(columnNames="group_name")})</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <fields>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <annotations>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="group_seq", sequenceName="group_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="group_seq")</annotation>
+            <annotation>@Column(name="group_id")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>groupName</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@Column(name="group_name")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>users</name>
+          <annotations>
+            <annotation>@ManyToMany</annotation>
+            <annotation>@JoinTable(name="users_group",joinColumns=@JoinColumn(name="group_id", referencedColumnName="group_id"),inverseJoinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"))</annotation>
+          </annotations>
+          <version>1.0.0</version>
+          <association>
+            <type>AppUser</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+      </fields>
+    </class>
+    <class jpa.entity="true" sc.generators="model,view,controller">
+      <name>Param</name>
+      <packageName>com.jsonapps.model</packageName>
+      <annotations>
+        <annotation>@XmlRootElement</annotation>
+        <annotation>@Entity</annotation>
+        <annotation>@Table(name="params",uniqueConstraints={@UniqueConstraint(columnNames="param_id"),@UniqueConstraint(columnNames="param_name")})</annotation>
+      </annotations>
+      <version>1.0.0</version>
+      <fields>
+        <field>
+          <name>id</name>
+          <type>int</type>
+          <annotations>
+            <annotation>@Id</annotation>
+            <annotation>@SequenceGenerator(name="param_seq", sequenceName="param_pk_seq")</annotation>
+            <annotation>@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="param_seq")</annotation>
+            <annotation>@Column(name="param_id")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>name</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@Column(name="param_name")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+        <field>
+          <name>paramValue</name>
+          <type>String</type>
+          <annotations>
+            <annotation>@Column(name="param_value")</annotation>
+          </annotations>
+          <version>1.0.0</version>
+        </field>
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public Param(String name, String value) {
+	this.setName(name);
+	this.setValue(value);
+  }
+</code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0</version>
+          <code>  public Param() {
+  }
+</code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class jaxrs.urls="/authenticate,/authenticate/*">
+      <name>AuthenticationService</name>
+      <packageName>com.effervens.proambu.services</packageName>
+      <annotations>
+        <annotation>@Path("/authenticate")</annotation>
+      </annotations>
+      <version>1.0.0</version>
+    </class>
+    <class>
+      <name>MainService</name>
+      <packageName>com.effervens.proambu.services</packageName>
+      <version>1.0.0</version>
+    </class>
+  </classes>
+</model>
+

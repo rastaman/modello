@@ -1,0 +1,348 @@
+package org.mergere.tissue;
+
+import org.prevayler.*;
+import org.prevayler.implementation.*;
+import org.prevayler.convenience.*;
+
+/**
+ * Generated Prevayler storage mechanism for Tissue
+ * @author Mr Modello
+ */
+public class TissuePrevaylerStore
+    implements Initializable, Startable
+{
+    private String databaseDirectory;
+
+    private Prevayler prevayler;
+
+    private Store store;
+
+    static class Store
+        implements Serializable
+    {
+        private Map IssueMap = new HashMap();
+
+        void addIssue( Issue o ) { IssueMap.put( o.getId(), o ); }
+
+        void updateIssue( Issue o ) { IssueMap.put( o. getId(), o ) }
+
+        void deleteIssue( Issue o ) { IssueMap.remove( o.getId() ) }
+
+        private Map ProjectMap = new HashMap();
+
+        void addProject( Project o ) { ProjectMap.put( o.getId(), o ); }
+
+        void updateProject( Project o ) { ProjectMap.put( o. getId(), o ) }
+
+        void deleteProject( Project o ) { ProjectMap.remove( o.getId() ) }
+
+        private Map UserMap = new HashMap();
+
+        void addUser( User o ) { UserMap.put( o.getId(), o ); }
+
+        void updateUser( User o ) { UserMap.put( o. getId(), o ) }
+
+        void deleteUser( User o ) { UserMap.remove( o.getId() ) }
+
+    }
+
+    // ----------------------------------------------------------------------
+    // Issue Transactions
+    // ----------------------------------------------------------------------
+
+    public class AddIssue
+        implements TransactionWithQuery
+    {
+        private final Issue o;
+
+        public AddIssue( Issue o )
+        {
+            this.o = o;
+        }
+
+        public Object executeAndQuery(Object prevalentSystem, Date executionTime)
+            throws Exception
+        {
+            Store system = (Store) prevalentSystem;
+
+            system.addIssue( o );
+
+            return o;
+        }
+    }
+
+    public class UpdateIssue
+        implements TransactionWithQuery
+    {
+        private final Issue o;
+
+        public UpdateIssue( Issue o )
+        {
+            this.o = o;
+        }
+
+        public Object executeAndQuery(Object prevalentSystem, Date executionTime)
+            throws Exception
+        {
+            Store system = (Store) prevalentSystem;
+
+            system.updateIssue( o );
+
+            return o;
+        }
+    }
+
+    public class DeleteIssue
+        implements Transaction
+    {
+        private Issue o;
+
+        public RemoveIssue( Issue o )
+        {
+            this.o = o;
+        }
+
+        public void executeOn(Object prevalentSystem, Date executionTime)
+        {
+            Store system = (Store) prevalentSystem;
+
+            system.deleteIssue( o );
+        }
+    }
+
+    // ----------------------------------------------------------------------
+    // Project Transactions
+    // ----------------------------------------------------------------------
+
+    public class AddProject
+        implements TransactionWithQuery
+    {
+        private final Project o;
+
+        public AddProject( Project o )
+        {
+            this.o = o;
+        }
+
+        public Object executeAndQuery(Object prevalentSystem, Date executionTime)
+            throws Exception
+        {
+            Store system = (Store) prevalentSystem;
+
+            system.addProject( o );
+
+            return o;
+        }
+    }
+
+    public class UpdateProject
+        implements TransactionWithQuery
+    {
+        private final Project o;
+
+        public UpdateProject( Project o )
+        {
+            this.o = o;
+        }
+
+        public Object executeAndQuery(Object prevalentSystem, Date executionTime)
+            throws Exception
+        {
+            Store system = (Store) prevalentSystem;
+
+            system.updateProject( o );
+
+            return o;
+        }
+    }
+
+    public class DeleteProject
+        implements Transaction
+    {
+        private Project o;
+
+        public RemoveProject( Project o )
+        {
+            this.o = o;
+        }
+
+        public void executeOn(Object prevalentSystem, Date executionTime)
+        {
+            Store system = (Store) prevalentSystem;
+
+            system.deleteProject( o );
+        }
+    }
+
+    // ----------------------------------------------------------------------
+    // User Transactions
+    // ----------------------------------------------------------------------
+
+    public class AddUser
+        implements TransactionWithQuery
+    {
+        private final User o;
+
+        public AddUser( User o )
+        {
+            this.o = o;
+        }
+
+        public Object executeAndQuery(Object prevalentSystem, Date executionTime)
+            throws Exception
+        {
+            Store system = (Store) prevalentSystem;
+
+            system.addUser( o );
+
+            return o;
+        }
+    }
+
+    public class UpdateUser
+        implements TransactionWithQuery
+    {
+        private final User o;
+
+        public UpdateUser( User o )
+        {
+            this.o = o;
+        }
+
+        public Object executeAndQuery(Object prevalentSystem, Date executionTime)
+            throws Exception
+        {
+            Store system = (Store) prevalentSystem;
+
+            system.updateUser( o );
+
+            return o;
+        }
+    }
+
+    public class DeleteUser
+        implements Transaction
+    {
+        private User o;
+
+        public RemoveUser( User o )
+        {
+            this.o = o;
+        }
+
+        public void executeOn(Object prevalentSystem, Date executionTime)
+        {
+            Store system = (Store) prevalentSystem;
+
+            system.deleteUser( o );
+        }
+    }
+
+
+    // ----------------------------------------------------------------------
+    // Component Lifecycle
+    // ----------------------------------------------------------------------
+
+    public void initialize()
+        throws Exception
+    {
+        prevayler = PrevaylerFactory.createPrevayler( new Store(), databaseDirectory );
+
+        store = (Store) prevayler.prevaylentSystem();
+    }
+
+    public void start()
+        throws TissueStoreException
+    {
+    }
+
+    public void stop()
+        throws TissueStoreException
+    {
+    }
+
+    // ----------------------------------------------------------------------
+    // Issue CRUD
+    // ----------------------------------------------------------------------
+
+    public Issue addIssue( Issue o )
+        throws StoreException
+    {
+        return prevayler.execute( new AddIssue( o ) );
+    }
+
+    public Issue updateIssue( String id, Issue o )
+        throws StoreException
+    {
+        return prevayler.execute( new UpdateIssue( o ) );
+    }
+
+    public void deleteIssue( String id )
+        throws StoreException
+    {
+        prevayler.execute( new DeleteIssue( id ) );
+    }
+
+    public Issue getIssue( String id )
+        throws StoreException
+    {
+        return store.getIssue( id );
+    }
+
+    // ----------------------------------------------------------------------
+    // Project CRUD
+    // ----------------------------------------------------------------------
+
+    public Project addProject( Project o )
+        throws StoreException
+    {
+        return prevayler.execute( new AddProject( o ) );
+    }
+
+    public Project updateProject( String id, Project o )
+        throws StoreException
+    {
+        return prevayler.execute( new UpdateProject( o ) );
+    }
+
+    public void deleteProject( String id )
+        throws StoreException
+    {
+        prevayler.execute( new DeleteProject( id ) );
+    }
+
+    public Project getProject( String id )
+        throws StoreException
+    {
+        return store.getProject( id );
+    }
+
+    // ----------------------------------------------------------------------
+    // User CRUD
+    // ----------------------------------------------------------------------
+
+    public User addUser( User o )
+        throws StoreException
+    {
+        return prevayler.execute( new AddUser( o ) );
+    }
+
+    public User updateUser( String id, User o )
+        throws StoreException
+    {
+        return prevayler.execute( new UpdateUser( o ) );
+    }
+
+    public void deleteUser( String id )
+        throws StoreException
+    {
+        prevayler.execute( new DeleteUser( id ) );
+    }
+
+    public User getUser( String id )
+        throws StoreException
+    {
+        return store.getUser( id );
+    }
+
+}
